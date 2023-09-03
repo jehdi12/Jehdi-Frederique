@@ -1,0 +1,53 @@
+import java.util.Arrays;
+import java.util.Comparator;
+
+public class Salesman {
+    String name;
+    float sales;
+
+    public Salesman(String name, float sales) {
+        this.name = name;
+        this.sales = sales;
+    }
+
+    public static Salesman[] getTopFive(Salesman[] allSales) {
+        // Sort the array of Salesman objects based on their sales in descending order
+        Arrays.sort(allSales, new Comparator<Salesman>() {
+            @Override
+            public int compare(Salesman s1, Salesman s2) {
+                // Sort in descending order
+                return Float.compare(s2.sales, s1.sales);
+            }
+        });
+
+        // Create a new array to store the top 5 salesmen
+        int topCount = Math.min(5, allSales.length);
+        Salesman[] topFive = new Salesman[topCount];
+
+        // Copy the top 5 salesmen into the new array
+        System.arraycopy(allSales, 0, topFive, 0, topCount);
+
+        return topFive;
+    }
+
+    public static void main(String[] args) {
+        
+        Salesman[] allSales = {
+            new Salesman("John", 10000.0f),
+            new Salesman("Alice", 8000.0f),
+            new Salesman("Bob", 12000.0f),
+            new Salesman("Eve", 9500.0f),
+            new Salesman("Mike", 11000.0f),
+            new Salesman("Lisa", 7500.0f)
+        };
+
+        
+        Salesman[] topFiveSalesmen = getTopFive(allSales);
+
+        
+        for (Salesman salesman : topFiveSalesmen) {
+            System.out.println(salesman.name);
+        }
+    }
+}
+
